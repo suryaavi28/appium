@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -16,29 +17,26 @@ import java.net.URL;
 public class AppiumBasicTest {
 	AppiumDriverLocalService service;
 
-	
-	public void appiumTest() throws MalformedURLException {
-		service = new AppiumServiceBuilder()
-				.withAppiumJS(new File("C:\\Users\\User\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
-				.withIPAddress("0.0.0.0")
-				.usingPort(4723)
-				.build();
 
-		service.start();
-	}
 @Test
 	public void startTest() throws MalformedURLException {
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "ADCEmulator");
-		capabilities.setCapability(MobileCapabilityType.APP,
-				"C:\\Users\\User\\eclipse-workspace\\appium\\src\\test\\resources\\ApiDemos-debug.apk");
-		capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+	service = new AppiumServiceBuilder()
+			.withAppiumJS(new File("C:\\Users\\User\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+			.withIPAddress("0.0.0.0")
+			.usingPort(4723)
+		
+			.build();
 
-		AndroidDriver driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
+	service.start();
 
-		// Perform your test actions here
+	UiAutomator2Options options = new UiAutomator2Options();
+	options.setDeviceName("ADC");
+	options.setApp("C:\\ApiDemos-debug.apk");
+	AndroidDriver driver = new AndroidDriver(new URL ("http://0.00.0:4723"), options);
+	driver.quit();
+		//xpath.id,accessibilityid,classname,androidUI automator
 
-		driver.quit();
-//        service.stop();
+		
+   service.stop();
 	}
 }
