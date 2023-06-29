@@ -5,6 +5,8 @@
     <classes>
       <class name="AdaniGroup.appium.AppiumBasicTest">
         <methods>
+          <include name="tearDown"/>
+          <include name="loginWithValidCredentials"/>
           <include name="startTest"/>
         </methods>
       </class> <!-- AdaniGroup.appium.AppiumBasicTest -->
